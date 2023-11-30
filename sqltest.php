@@ -81,7 +81,7 @@
         _END;
         }
 
-        echo '</div>'; // Closing div for records-container
+        echo '</div>'; 
 
         $result->close();
         $conn->close();
