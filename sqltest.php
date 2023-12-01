@@ -6,11 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="sqltest.php" method="get">
-        <label for="">username:</label>
-        <input type="text" name="username"></label>
-        <label for="">password:</label>
-        <input type="password" name="password"></label>
+    <form action="sqltest.php" method="post">
+        <label for="">username:</label><br>
+        <input type="text" name="username"></label><br>
+        <label for="">password:</label><br>
+        <input type="password" name="password"></label><br>
         <input type="submit" value="Log in">
     </form>
     
@@ -18,13 +18,7 @@
 </html>
 
 <?php
-    $name = "Eliyas";
-    $food = "pizza";
-    $email = "eliyasson@gmail.com";
-
-    echo"Hello {$name}<br>";
-    echo"I like {$food}<br>";
-    echo"Hello {$email}<br>";
-
+    echo "{$_POST["username"]}  <br>";
+    echo "{$_POST["password"]} <br>";
 
 ?>
