@@ -7,18 +7,23 @@
 </head>
 <body>
     <form action="sqltest.php" method="post">
-        <label for="">username:</label><br>
-        <input type="text" name="username"></label><br>
-        <label for="">password:</label><br>
-        <input type="password" name="password"></label><br>
-        <input type="submit" value="Log in">
+        <label for="">Enter quantity:</label><br>
+        <input type="text" name="quantity"></label><br>
+        <input type="submit" value="Calculate total">
+        
     </form>
     
 </body>
 </html>
 
 <?php
-    echo "{$_POST["username"]}  <br>";
-    echo "{$_POST["password"]} <br>";
+   $item= "pizza";
+   $price= 5.99;
+   $quantity = $_POST["quantity"];
+   $total = $quantity * $price;
+
+   echo "One {$item} price is: {$price} <br>";
+   echo "You have ordered {$quantity} x {$item}/s <br>";
+   echo "Your total is: \${$total}";
 
 ?>
