@@ -1,95 +1,30 @@
 <!DOCTYPE html>
-<html>
- <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="tyylit.css">
- </head>
- <body>
-    <?php
-
-        if (isset($_POST['delete']) && isset($_POST['isbn'])) {
-            $isbn = get_post($conn, 'isbn');
-            $query = "DELETE FROM classics WHERE isbn='$isbn'";
-            $result = $conn->query($query);
-            if (!$result) {
-                echo "DELETE failed<br><br>";
-            }
-        }
-
-        if (
-            isset($_POST['author']) &&
-            isset($_POST['title']) &&
-            isset($_POST['category']) &&
-            isset($_POST['year']) &&
-            isset($_POST['isbn'])
-        ) {
-            $author = get_post($conn, 'author');
-            $title = get_post($conn, 'title');
-            $category = get_post($conn, 'category');
-            $year = get_post($conn, 'year');
-            $isbn = get_post($conn, 'isbn');
-            $query = "INSERT INTO classics VALUES ('$author', '$title', '$category', '$year', '$isbn')";
-            $result = $conn->query($query);
-            if (!$result) {
-                echo "INSERT failed<br><br>";
-            }
-        }
-
-        echo <<<_END
-        <form action="sqltest.php" method="post">
-            <pre>
-                Author:     <input type="text" name="author">
-                Title:      <input type="text" name="title">
-                Category:   <input type="text" name="category">
-                Year:       <input type="text" name="year">
-                ISBN:       <input type="text" name="isbn">
-                <input type="submit"  value="ADD RECORD">
-            </pre>
-        </form>
-        <div class="records-container">
-        _END;
-
-        $query = "SELECT * FROM classics";
-        $result = $conn->query($query);
-        if (!$result) {
-            die("Database access failed");
-        }
-
-        $rows = $result->num_rows;
-        for ($j = 0; $j < $rows; ++$j) {
-            $row = $result->fetch_array(MYSQLI_NUM);
-            $r0 = htmlspecialchars($row[0]);
-            $r1 = htmlspecialchars($row[1]);
-            $r2 = htmlspecialchars($row[2]);
-            $r3 = htmlspecialchars($row[3]);
-            $r4 = htmlspecialchars($row[4]);
-
-            echo <<<_END
-                <div class="record">
-                    <p>Author: $r0</p>
-                    <p>Title: $r1</p>
-                    <p>Category: $r2</p>
-                    <p>Year: $r3</p>
-                    <p>ISBN: $r4</p>
-                    <form action='sqltest.php' method='post'>
-                        <input type='hidden' name='delete' value='yes'>
-                        <input type='hidden' name='isbn' value='$r4'>
-                        <input class='delete-btn' type='submit' value='DELETE RECORD'>
-                    </form>
-                </div>
-        _END;
-        }
-
-        echo '</div>'; 
-
-        $result->close();
-        $conn->close();
-
-        function get_post($conn, $var)
-        {
-            return $conn->real_escape_string($_POST[$var]);
-        }
-    ?>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="sqltest.php" method="get">
+        <label for="">username:</label>
+        <input type="text" name="username"></label>
+        <label for="">password:</label>
+        <input type="password" name="password"></label>
+        <input type="submit" value="Log in">
+    </form>
+    
 </body>
 </html>
+
+<?php
+    $name = "Eliyas";
+    $food = "pizza";
+    $email = "eliyasson@gmail.com";
+
+    echo"Hello {$name}<br>";
+    echo"I like {$food}<br>";
+    echo"Hello {$email}<br>";
+
+
+?>
