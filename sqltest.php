@@ -17,13 +17,14 @@
 </html>
 
 <?php
-   $item= "pizza";
-   $price= 5.99;
-   $quantity = $_POST["quantity"];
-   $total = $quantity * $price;
+   $foods = array("apple", "orange", "banana", "coconut");
 
-   echo "One {$item} price is: {$price} <br>";
-   echo "You have ordered {$quantity} x {$item}/s <br>";
-   echo "Your total is: \${$total}";
+   /* foreach($foods as $food) {
+    echo $food . "<br>";
+   } */
+
+   for ($i = 0; $i < count($foods); $i++) {
+    echo $foods[$i] . "<br>";
+   }
 
 ?>
