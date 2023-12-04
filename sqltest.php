@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,20 +11,28 @@
 </head>
 <body>
     <form action="sqltest.php" method="post">
-        <input type="checkbox" name="pizza" value="Pizza">Pizza<br>
-        <input type="checkbox" name="hamburger" value="Hamburger">Hamburger<br>
-        <input type="checkbox" name="hotdog" value="Hotdog">Hotdog<br>
-        <input type="checkbox" name="tacoa" value="Taco">Taco<br>
-        <input type="submit" name="submit">
+        username:<br>
+        <input type="text" name="username"><br>
+        password:<br>
+        <input type="password" name="password"><br>
+        <input type="submit" name="login" value="login">
     </form>
-    
 </body>
 </html>
 
 <?php
-    if(isset($_POST["submit"])) {
-        if(isset($_POST["pizza"])) {
-            echo "You like Pizza";
+   if(isset($_POST["login"])) {
+        
+
+        if(!empty($_POST["username"]) && !empty($_POST["password"])) {
+            $_SESSION["username"] = $_POST["username"];
+            $_SESSION["password"] = $_POST["password"];
+
+            header("Location: home.php");
+
+        } else {
+            echo "Missing username/password";
         }
-    }
+   }
+
 ?>
