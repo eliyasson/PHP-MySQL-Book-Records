@@ -7,27 +7,20 @@
 </head>
 <body>
     <form action="sqltest.php" method="post">
-        <label for="username">username:</label><br>
-        <input type="text" name="username"></label><br>
-        <label for="password">password:</label><br>
-        <input type="password" name="password"></label><br>
-        <input type="submit" name="login" value="Log in">
+        <input type="checkbox" name="pizza" value="Pizza">Pizza<br>
+        <input type="checkbox" name="hamburger" value="Hamburger">Hamburger<br>
+        <input type="checkbox" name="hotdog" value="Hotdog">Hotdog<br>
+        <input type="checkbox" name="tacoa" value="Taco">Taco<br>
+        <input type="submit" name="submit">
     </form>
     
 </body>
 </html>
 
 <?php
-    if(isset($_POST["login"])) {
-        $username  = $_POST["username"];
-        $password  = $_POST["password"];
-
-        if(empty($username)){
-            echo "Username is missing!";
-        } elseif(empty($password)){
-            echo "Password is missing!";
-        } else {
-            echo "Hello {$username}";
+    if(isset($_POST["submit"])) {
+        if(isset($_POST["pizza"])) {
+            echo "You like Pizza";
         }
-    } 
+    }
 ?>
