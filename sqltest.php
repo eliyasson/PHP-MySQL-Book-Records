@@ -7,24 +7,27 @@
 </head>
 <body>
     <form action="sqltest.php" method="post">
-        <label for="">Enter quantity:</label><br>
-        <input type="text" name="quantity"></label><br>
-        <input type="submit" value="Calculate total">
-        
+        <label for="username">username:</label><br>
+        <input type="text" name="username"></label><br>
+        <label for="password">password:</label><br>
+        <input type="password" name="password"></label><br>
+        <input type="submit" name="login" value="Log in">
     </form>
     
 </body>
 </html>
 
 <?php
-   $foods = array("apple", "orange", "banana", "coconut");
+    if(isset($_POST["login"])) {
+        $username  = $_POST["username"];
+        $password  = $_POST["password"];
 
-   /* foreach($foods as $food) {
-    echo $food . "<br>";
-   } */
-
-   for ($i = 0; $i < count($foods); $i++) {
-    echo $foods[$i] . "<br>";
-   }
-
+        if(empty($username)){
+            echo "Username is missing!";
+        } elseif(empty($password)){
+            echo "Password is missing!";
+        } else {
+            echo "Hello {$username}";
+        }
+    } 
 ?>
