@@ -18,22 +18,25 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($result){
         $num=mysqli_num_rows($result);
         if($num>0) {
-            echo "Username already exist";
+            echo "<p class='error-message'>Username already exist</p>";
         } else {
             $sql = "INSERT INTO customers (username,password)
             values('$username', '$password')";
             $result = mysqli_query($conn, $sql);
-        
+
             if($result) {
-                echo "Signup Successful";
+                echo "<p class='success-message'>Signup Successful</p>";
             } else {
-                die("Connection failed" . mysqli_error($conn));
+                die("<p class='error-message'>Connection failed" . mysqli_error($conn)) . "</p>";
             }
         }
     }
 
 }
 ?>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
