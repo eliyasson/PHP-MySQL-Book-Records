@@ -1,3 +1,21 @@
+<?php
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    include 'login.php';
+    $username = $_POST['$username'];
+    $password = $_POST['password'];
+
+    $sql = "INSERT INTO customers (username,password)
+    values('$username', '$password')";
+    $result = mysqli_query($conn, $sql);
+
+    if($result) {
+        echo "Data inserted successfully";
+    } else {
+        die("Connection failed" . mysqli_error($conn));
+    }
+
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
