@@ -1,10 +1,10 @@
 <?php
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     include 'login.php';
-    $username = $_POST['$username'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "INSERT INTO customers (username,password)
+    /* $sql = "INSERT INTO customers (username,password)
     values('$username', '$password')";
     $result = mysqli_query($conn, $sql);
 
@@ -12,6 +12,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         echo "Data inserted successfully";
     } else {
         die("Connection failed" . mysqli_error($conn));
+    } */
+    $sql = "select * from customers where username = '$username'";
+    $result=mysqli_query($conn,$sql);
+    if($result){
+        $num=mysqli_num_rows($result);
+        if($num>0) {
+            echo "Username already exist";
+        } else {
+            $sql = "INSERT INTO customers (username,password)
+            values('$username', '$password')";
+            $result = mysqli_query($conn, $sql);
+        
+            if($result) {
+                echo "Signup Successful";
+            } else {
+                die("Connection failed" . mysqli_error($conn));
+            }
+        }
     }
 
 }
