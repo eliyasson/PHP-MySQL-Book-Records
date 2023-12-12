@@ -1,70 +1,14 @@
-<?php
-session_start();
-if (!isset($_SESSION['username'])) {
-    header('location: signin.php');
-    exit(); 
-}
-?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Home Page</title>
-    <link rel="stylesheet" href="tyylit2.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-    <h2>Tervetuloa, <?php echo $_SESSION['username']; ?>!</h2>
-    
-    <form action="logout.php" method="post">
-        <input type="submit" style="background-color: red" value="Logout">
-    </form>
-
     <?php
-    require_once 'login.php';
-    $conn = new mysqli($hn, $un, $pw, $db);
-    if ($conn->connect_error) {
-        die("Fatal connection Error");
-    }
-
-    if (isset($_POST['delete']) && isset($_POST['isbn'])) {
-        $isbn = get_post($conn, 'isbn');
-        $query = "DELETE FROM books WHERE isbn='$isbn'";
-        $result = $conn->query($query);
-        if (!$result) {
-            echo "DELETE failed<br><br>";
-        }
-    }
-
-    if (
-        isset($_POST['author']) &&
-        isset($_POST['title']) &&
-        isset($_POST['category']) &&
-        isset($_POST['year']) &&
-        isset($_POST['isbn']) &&
-        isset($_POST['quantity'])
-    ) {
-        $author = get_post($conn, 'author');
-        $title = get_post($conn, 'title');
-        $category = get_post($conn, 'category');
-        $year = get_post($conn, 'year');
-        $isbn = get_post($conn, 'isbn');
-        $quantity = get_post($conn, 'quantity');
-        
-        // Prepared statement to avoid SQL injection
-        $query = "INSERT INTO books (author, title, catagory, year, isbn, quantity) VALUES (?, ?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param('sssisi', $author, $title, $category, $year, $isbn, $quantity);
-        if ($stmt->execute()) {
-            echo "Record added successfully.<br><br>";
-        } else {
-            echo "INSERT failed<br><br>";
-        }
-        $stmt->close();
-    }
-
-    // Display form for adding records
-    echo <<<HTML
-    <form action="home.php" method="post">
+echo <<<HTML
+    <form action="user.php" method="post">
         <pre>
             Author:   <input type="text" name="author">
             Title:    <input type="text" name="title">
