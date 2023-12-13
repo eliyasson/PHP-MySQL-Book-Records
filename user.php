@@ -1,6 +1,6 @@
-<!-- 
-?php
-/* session_start();
+ 
+<?php
+session_start();
 if (!isset($_SESSION['username'])) {
     header('location: signin.php');
     exit();
@@ -10,7 +10,7 @@ $conn = new mysqli($hn, $un, $pw, $db);
 if ($conn->connect_error) {
 die("Fatal Connection Error");
 }
- 
+
 
 $query = "SELECT * FROM books";
 $stmt = $conn->prepare($query);
@@ -27,15 +27,14 @@ while ($row = $result->fetch_assoc()) {
 }
 $stmt->close();
 $conn->close();
-?> -->
+?>
 
 <!DOCTYPE html>
 <html>
 <head>
-        <title>Käyttäjäsivu</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <style>
-          body {
+    <title>Käyttäjäsivu</title>
+    <style>
+        body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 20px;
@@ -45,77 +44,107 @@ $conn->close();
             border: 1px solid #ccc;
             padding: 10px;
             margin: 10px;
-           display: inline-block;
-           vertical-align: top;
-           box-sizing: border-box;
-
+            display: inline-block;
+            vertical-align: top;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
         }
         .book p {
             margin: 5px 0;
         }
-        </style>
+        form {
+            display: inline;
+        }
+
+        button[name="borrow_book"] {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        button[name="borrow_book"]:hover {
+            background-color: #0056b3;
+        }
+         h1, h2 {
+            color: #333;
+        }
+
+        a {
+            background-color: #007bff;;
+            margin-bottom: 10px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: black;
+        }
+        .welcome {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+.overview {
+            margin-bottom: 20px;
+        }
+        .navigation {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .navigation a {
+            margin: 0 10px;
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .navigation a:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
 </head>
 <body>
-        <?php foreach ($books as $book): ?>
-         
-            <div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSignin">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content rounded-4 shadow">
-      <div class="modal-header p-5 pb-4 border-bottom-0">
-        <h1 class="fw-bold mb-0 fs-2">Sign up for free</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" fdprocessedid="yptvcc"></button>
-      </div>
-
-      <div class="modal-body p-5 pt-0">
-        <form class="">
-          <div class="form-floating mb-3">
-            <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com" fdprocessedid="dy29lk">
-            <label for="floatingInput">Email address</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password" fdprocessedid="fqch9">
-            <label for="floatingPassword">Password</label>
-          </div>
-          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" fdprocessedid="jmae6a">Sign up</button>
-          <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>
-          <hr class="my-4">
-          <h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2>
-          <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit" fdprocessedid="1hfczx">
-            <svg class="bi me-1" width="16" height="16"><use xlink:href="#twitter"></use></svg>
-            Sign up with Twitter
-          </button>
-          <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="submit" fdprocessedid="e7wrx4">
-            <svg class="bi me-1" width="16" height="16"><use xlink:href="#facebook"></use></svg>
-            Sign up with Facebook
-          </button>
-          <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit" fdprocessedid="r0p1">
-            <svg class="bi me-1" width="16" height="16"><use xlink:href="#github"></use></svg>
-            Sign up with GitHub
-          </button>
-        </form>
-      </div>
+    <div class="welcome">
+        <h1>Tervetuloa Kyläkirjastoon</h1>
+        <p>Tutustu kirja- ja laitekokoelmiimme sekä keskustele kanssamme chatin kautta avun saamise$
     </div>
-  </div>
-</div>
+
+    <div class="overview">
+        <h2>Kirjaston Palvelut Yleiskatsaus:</h2>
+        <p>Täällä voit nähdä saatavilla olevat kirjat, lainata laitteita ja keskustella kirjaston h$
+    </div>
+
+    <div class="navigation">
+        <h2>Navigointivalikko:</h2>
+        <a href="user.php">Kirjalistaus</a>
+        <a href="#">Laitteiden Lainaus</a>
+        <a href="chat.php">Chat</a>
+    </div>
 
 
-
-
-
-        <!-- <div class="book">
-            <p>Author: <?php echo htmlspecialchars($book['author']); ?></p>
-            <p>Title: <?php echo htmlspecialchars($book['title']); ?></p>
-            <p>Category: <?php echo htmlspecialchars($book['catagory']); ?></p>
-            <p>Year: <?php echo htmlspecialchars($book['year']); ?></p>
+    <?php foreach ($books as $book): ?>
+        <div class="book">
+            <p>Kirjailija: <?php echo htmlspecialchars($book['author']); ?></p>
+            <p>Nimi: <?php echo htmlspecialchars($book['title']); ?></p>
+            <p>Kategoria: <?php echo htmlspecialchars($book['category']); ?></p>
+            <p>Vuosi: <?php echo htmlspecialchars($book['year']); ?></p>
             <p>ISBN: <?php echo htmlspecialchars($book['isbn']); ?></p>
-            <p>Quantity: <?php echo htmlspecialchars($book['quantity']); ?>
-            </p>
-        </div> -->
+            <p>Määrä: <?php echo htmlspecialchars($book['quantity']); ?></p>
+          <form action="borrow.php" method="post">
+            <input type="hidden" name="book_id" value="<?php echo $book['isbn']; ?>">
+            <button type="submit" name="borrow_book">Borrow</button>
+        </form>
+        </div>
     <?php endforeach; ?>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> 
 </body>
 </html>
 
-
+<form action="logout.php" method="post">
+        <input type="submit" style="background-color: red" value="Logout">
+    </form>
 

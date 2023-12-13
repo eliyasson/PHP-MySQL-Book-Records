@@ -84,7 +84,6 @@ if (!isset($_SESSION['username'])) {
     }
 
     while ($row = $result->fetch_assoc()) {
-        echo '<div class="records">';
         echo '<div class="record">';
         echo '<p>Author: ' . htmlspecialchars($row['author']) . '</p>';
         echo '<p>Title: ' . htmlspecialchars($row['title']) . '</p>';
@@ -99,20 +98,20 @@ if (!isset($_SESSION['username'])) {
         echo '<input class="delete-btn" type="submit" value="DELETE RECORD">';
         echo '</form>';
         echo '<form action="update.php" method="post">';
-        echo '<input type="hidden" name="update" value="yes">';
         echo '<input type="hidden" name="isbn" value="' . htmlspecialchars($row['isbn']) . '">';
         echo '<input class="update-btn" type="submit" value="UPDATE">';
         echo '</form>';
         echo '</div></div></div>';
-    }
-
-    $result->close();
-    $conn->close();
-
-    function get_post($conn, $var)
-    {
-        return $conn->real_escape_string($_POST[$var]);
-    }
-    ?>
-</body>
-</html>
+      }
+    
+        $result->close();
+        $conn->close();
+    
+        function get_post($conn, $var)
+        {
+            return $conn->real_escape_string($_POST[$var]);
+        }
+        ?>
+    </body>
+    </html>
+    
