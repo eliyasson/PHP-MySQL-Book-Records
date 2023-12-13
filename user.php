@@ -1,62 +1,70 @@
+
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('location: signin.php');
+    exit();
+}
+require_once 'login.php';
+$conn = new mysqli($hn, $un, $pw, $db);
+if ($conn->connect_error) {
+die("Fatal Connection Error");
+}
+
+
+$query = "SELECT * FROM books";
+$stmt = $conn->prepare($query);
+if ($stmt === false) {
+    // Handle error in the query preparation
+    echo "Query preparation error: " . $conn->error;
+    exit();
+}
+$stmt->execute();
+$result = $stmt->get_result();
+$books = [];
+while ($row = $result->fetch_assoc()) {
+        $books[] = $row;
+}
+$stmt->close();
+$conn->close();
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+        <title>Käyttäjäsivu</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        .book {
+            width: 20%;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+           display: inline-block;
+           vertical-align: top;
+           box-sizing: border-box;
+
+        }
+        .book p {
+            margin: 5px 0;
+        }
+        </style>
 </head>
 <body>
-    <?php
-echo <<<HTML
-    <form action="user.php" method="post">
-        <pre>
-            Author:   <input type="text" name="author">
-            Title:    <input type="text" name="title">
-            Category: <input type="text" name="category">
-            Year:     <input type="text" name="year">
-            ISBN:     <input type="text" name="isbn">
-            Quantity: <input type="text" name="quantity">
-            <input type="submit" value="ADD RECORD">
-        </pre>
-    </form>
-    HTML;
+        <?php foreach ($books as $book): ?>
+        <div class="book">
 
-    $query = "SELECT * FROM books";
-    $result = $conn->query($query);
-    if (!$result) {
-        die("Database access failed");
-    }
-
-    while ($row = $result->fetch_assoc()) {
-        echo '<div class="records">';
-        echo '<div class="record">';
-        echo '<p>Author: ' . htmlspecialchars($row['author']) . '</p>';
-        echo '<p>Title: ' . htmlspecialchars($row['title']) . '</p>';
-        echo '<p>Category: ' . htmlspecialchars($row['catagory']) . '</p>';
-        echo '<p>Year: ' . htmlspecialchars($row['year']) . '</p>';
-        echo '<p>ISBN: ' . htmlspecialchars($row['isbn']) . '</p>';
-        echo '<p>Quantity: ' . htmlspecialchars($row['quantity']) . '</p>';
-        echo '<div class="button-group">';
-        echo '<form action="home.php" method="post">';
-        echo '<input type="hidden" name="delete" value="yes">';
-        echo '<input type="hidden" name="isbn" value="' . htmlspecialchars($row['isbn']) . '">';
-        echo '<input class="delete-btn" type="submit" value="DELETE RECORD">';
-        echo '</form>';
-        echo '<form action="update.php" method="post">';
-        echo '<input type="hidden" name="update" value="yes">';
-        echo '<input type="hidden" name="isbn" value="' . htmlspecialchars($row['isbn']) . '">';
-        echo '<input class="update-btn" type="submit" value="UPDATE">';
-        echo '</form>';
-        echo '</div></div></div>';
-    }
-
-    $result->close();
-    $conn->close();
-
-    function get_post($conn, $var)
-    {
-        return $conn->real_escape_string($_POST[$var]);
-    }
-    ?>
+        <p>Author: <?php echo htmlspecialchars($book['author']); ?></p>
+            <p>Title: <?php echo htmlspecialchars($book['title']); ?></p>
+            <p>Category: <?php echo htmlspecialchars($book['catagory']); ?></p>
+            <p>Year: <?php echo htmlspecialchars($book['year']); ?></p>
+            <p>ISBN: <?php echo htmlspecialchars($book['isbn']); ?></p>
+            <p>Quantity: <?php echo htmlspecialchars($book['quantity']); ?></p>
+        </div>
+    <?php endforeach; ?>
 </body>
 </html>
