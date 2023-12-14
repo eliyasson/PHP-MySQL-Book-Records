@@ -52,99 +52,53 @@ $conn->close();
         .book p {
             margin: 5px 0;
         }
-        form {
-            display: inline;
-        }
-
-        button[name="borrow_book"] {
-            padding: 8px 15px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 14px;
-            transition: background-color 0.3s ease;
-        }
-
-        button[name="borrow_book"]:hover {
-            background-color: #0056b3;
-        }
-         h1, h2 {
-            color: #333;
-        }
-
-        a {
-            background-color: #007bff;;
-            margin-bottom: 10px;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-            color: black;
-        }
-        .welcome {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-.overview {
-            margin-bottom: 20px;
-        }
-        .navigation {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .navigation a {
-            margin: 0 10px;
-            text-decoration: none;
-            padding: 5px 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .navigation a:hover {
-            background-color: #f0f0f0;
-        }
+        
     </style>
 </head>
-<body>
-    <div class="welcome">
-        <h1>Tervetuloa Kyläkirjastoon</h1>
-        <p>Tutustu kirja- ja laitekokoelmiimme sekä keskustele kanssamme chatin kautta avun saamise$
+<body style="isolation: isolate;">
+
+
+<div class="container py-3">
+  <header>
+    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+      <a href="" class="d-flex align-items-center link-body-emphasis text-decoration-none">
+        <span class="fs-4">Mysqli Kirjasto</span>
+      </a>
+
+      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="user.php">kirjalisraus</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Laitteiden Lainaus</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="chat.php">Chat</a>
+        <a class="py-2 link-body-emphasis text-decoration-none" href="logout.php">Logout</a>
+      </nav>
     </div>
 
-    <div class="overview">
-        <h2>Kirjaston Palvelut Yleiskatsaus:</h2>
-        <p>Täällä voit nähdä saatavilla olevat kirjat, lainata laitteita ja keskustella kirjaston h$
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-4 fw-normal text-body-emphasis">Tervetuloa Kyläkirjastoon</h1>
+      <p class="fs-5 text-body-secondary">Täällä voit nähdä saatavilla olevat kirjat, lainata laitteita ja keskustella kirjaston henkilökunnan kanssa avun saamiseksi.</p>
     </div>
-
-    <div class="navigation">
-        <h2>Navigointivalikko:</h2>
-        <a href="user.php">Kirjalistaus</a>
-        <a href="#">Laitteiden Lainaus</a>
-        <a href="chat.php">Chat</a>
-    </div>
-
-
-    <?php foreach ($books as $book): ?>
-        <div class="book">
-            <p>Kirjailija: <?php echo htmlspecialchars($book['author']); ?></p>
-            <p>Nimi: <?php echo htmlspecialchars($book['title']); ?></p>
-            <p>Kategoria: <?php echo htmlspecialchars($book['category']); ?></p>
-            <p>Vuosi: <?php echo htmlspecialchars($book['year']); ?></p>
-            <p>ISBN: <?php echo htmlspecialchars($book['isbn']); ?></p>
-            <p>Määrä: <?php echo htmlspecialchars($book['quantity']); ?></p>
-          <form action="borrow.php" method="post">
-            <input type="hidden" name="book_id" value="<?php echo $book['isbn']; ?>">
-            <button type="submit" name="borrow_book">Borrow</button>
-        </form>
+  </header>
+     <?php foreach ($books as $book): ?>
+            <div class="book">
+                <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">Ilmainen</h4>
+                </div>
+                <p>Kirjailija: <?php echo htmlspecialchars($book['author']); ?></p>
+                <p>Nimi: <?php echo htmlspecialchars($book['title']); ?></p>
+                <p>Kategoria: <?php echo htmlspecialchars($book['category']); ?></p>
+                <p>Vuosi: <?php echo htmlspecialchars($book['year']); ?></p>
+                <p>ISBN: <?php echo htmlspecialchars($book['isbn']); ?></p>
+                <p>Määrä: <?php echo htmlspecialchars($book['quantity']); ?></p>
+                <form action="borrow.php" method="post">
+                <input type="hidden" name="book_id" value="<?php echo $book['isbn']; ?>">
+                    <button type="submit" name="borrow_book" class="w-100 btn btn-lg btn-outline-primary">Lainaa</button>
+                </form>
+            </div>
         </div>
-    <?php endforeach; ?>
+        </div>
+ <?php endforeach; ?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
-
-<form action="logout.php" method="post">
-        <input type="submit" style="background-color: red" value="Logout">
-    </form>
-

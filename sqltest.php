@@ -122,7 +122,7 @@ for ($j = 0; $j < $rows; ++$j) {
             <p>Category: $r2</p>
             <p>Year: $r3</p>
             <p>ISBN: $r4</p>
-            <p>ISBN: $r5</p>
+            <p>Quantity: $r5</p>
             <form action='sqltest.php' method='post'>
                 <input type='hidden' name='delete' value='yes'>
                 <input type='hidden' name='isbn' value='$r4'>
