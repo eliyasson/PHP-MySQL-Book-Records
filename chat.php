@@ -1,36 +1,55 @@
 <?php
 require_once 'login.php';
 $conn = new mysqli($hn, $un, $pw, $db);
+
 if ($conn->connect_error) {
     die("Fatal connection Error");
 }
 
-if (isset($_POST['username'])) {
-    $username = get_post($conn, 'username');
-    $message = get_post($conn, 'message');
-    $timestamp = get_post($conn, 'timestamp'); // Corrected 'timetamp' to 'timestamp'
+// Check if the form has been submitted
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Get values from the form
+    $username = $_POST['username'];
+    $message = $_POST['message'];
+    
+    // Use the current timestamp for the database insertion
+    $timestamp = date('Y-m-d H:i:s'); // Format the timestamp as per your database column
 
+    // Insert data into the database
     $query = "INSERT INTO messages (username, message, timestamp) VALUES ('$username', '$message', '$timestamp')";
     $result = $conn->query($query);
+
     if (!$result) {
-        echo "INSERT failed<br><br>";
+        echo "INSERT failed: " . $conn->error;
     }
 }
 
-echo <<<_END
-<form action="chat.php" method="post"><pre>
-Username: <input type="text" name="username">
-Message: <textarea type="text" name="message"></textarea>
-Timestamp: <input type="text" name="timestamp">
-<input type="submit" value="send">
-</pre></form></center>
-_END;
+?>
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+</head>
+<body>
+
+<form action="chat.php" method="post">
+    <pre>
+        Username: <input type="text" name="username">
+        Message: <textarea name="message"></textarea>
+        <input type="submit" value="Send">
+    </pre>
+</form>
+
+<?php
+// Display the messages
 $query = "SELECT * FROM messages";
 $result = $conn->query($query);
+
 if (!$result) {
     die("Database access failed: " . $conn->error);
 }
+
 $rows = $result->num_rows;
 
 for ($j = 0; $j < $rows; ++$j) {
@@ -39,21 +58,17 @@ for ($j = 0; $j < $rows; ++$j) {
     $r1 = htmlspecialchars($row['username']);
     $r2 = htmlspecialchars($row['message']);
     $r3 = htmlspecialchars($row['timestamp']);
-    echo <<<_END
-    <pre>
-    Id: $r0
-    Username: $r1
-    Message: $r2
-    Timestamp: $r3
-    </pre>
-_END;
+    
+    echo "<pre>";
+    echo "Id: $r0<br>";
+    echo "Username: $r1<br>";
+    echo "Message: $r2<br>";
+    echo "Timestamp: $r3<br>";
+    echo "</pre>";
 }
 
 $result->close();
 $conn->close();
-
-function get_post($conn, $var)
-{
-    return $conn->real_escape_string($_POST[$var]);
-}
 ?>
+</body>
+</html>
