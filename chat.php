@@ -76,33 +76,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
                 <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-$
                 </svg>
-                <span class="fs-4">Mysqli Kirjasto</span>
-            </a>
+                <span class="fs-4">Mysqli Kirjasto</span></a>
 
             <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
                 <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="user.php">kirjalisraus</a>
-                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Laitteiden Lainaus</a>
+                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="borrow.php">Laitteiden Lainaus</a>
                 <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="wishlist.php">Wish List</a>
 
                 <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="chat.php">Chat</a>
                 <a class="py-2 link-body-emphasis text-decoration-none" href="logout.php">Logout</a>
             </nav>
+
         </div>
         
-            <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
             <h1 class="display-4 fw-normal text-body-emphasis">Tervetuloa Kyläkirjastoon</h1>
             <p class="fs-5 text-body-secondary">Täällä voit keskustella kirjaston henkilökunnan kanssa avun saamiseksi.</p>
             </div>
+
 
         <form action="chat.php" method="post">
             <pre>
                 Username: <input type="text" name="username">
                 Message: <textarea name="message"></textarea>
+                <hidden input type="text" name="timestamp">
                 <input type="submit" value="Send">
             </pre>
         </form>
 
-        <?php
+
+          <?php
         // Display the messages
         $query = "SELECT * FROM messages";
         $result = $conn->query($query);
@@ -119,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $r1 = htmlspecialchars($row['username']);
             $r2 = htmlspecialchars($row['message']);
             $r3 = htmlspecialchars($row['timestamp']);
-            
+
             echo "<pre>";
             echo "Id: $r0<br>";
             echo "Username: $r1<br>";
@@ -135,6 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         return $conn->real_escape_string($_POST[$var]);
         }
         ?>
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
