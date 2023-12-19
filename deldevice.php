@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-        <div class="container">
+<div class="container">
             <h1>Delete Device</h1>
         <div class="device-info">
         <?php
@@ -49,13 +49,14 @@
                 echo "</form>";
                 echo "</pre></center>";
             }
-            $result->close();
-            $conn->close();
-            function get_post($conn,$var)
-            {
-            return $conn->real_escape_string($_POST[$var]);
-            }
+                $result->close();
+                $conn->close();
+                function get_post($conn,$var)
+                {
+                return $conn->real_escape_string($_POST[$var]);
+                }
             ?>
+
     </div>
     </div>
 </body>

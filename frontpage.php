@@ -7,8 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body style="isolation: isolate;">
+
 <header data-bs-theme="dark">
-    
+
     <nav class="navbar-dark fixed-top" style="background-color: rgba(0, 0, 0, 0.5)";>
         <header class="d-flex flex-wrap    py-1 mb-1 border-bottom">
         <div class="col-md-3 mb-2 mb-md-0">
@@ -17,34 +18,39 @@
             </a>
         </div>
 
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Home</a></li>
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="frontpage.php" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Home</a></li>
             <li><a href="#" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Info</a></li>
+            <li><a href="#" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Kirjasto</a></li>
         </ul>
 
-        <div class="text-end">
+        <div class="col-md-3 text-end">
             <a href="signin.php" class="btn btn-primary" role="button">Login</a>
             <a href="signup.php" class="btn btn-primary" role="button">Sign-up</a>
         </div>
 
         </header>
     </nav>
+
+</header>
+
+    </nav>
   
 </header>
 
 <main>
 
-  <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+<div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class="active" aria-current="true"></button>
     </div>
     <div class="carousel-inner">
-    
+
 
       <div class="carousel-item">
-      
+
         <div class="carousel-caption d-none d-md-block text-white text-shadow" style="background-color: rgba(0, 0, 0, 0.5);">
             <div class="container">
                 <h1 class="display-5 fw-bold">Tervetuloa <?php echo $_SESSION['username']; ?> Kyläkirjastoon</h1>
@@ -57,9 +63,10 @@
                 </div>
             </div>
         </div>
+
       <img src="./kuva/kuva 1.jpg" class="bd-placeholder-img" width="100%" height="700" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
         
-        <div class="container">
+      <div class="container">
           <div class="carousel-caption text-start">
           </div>
         </div>
@@ -77,13 +84,14 @@
                 </div>
             </div>
         </div>
+
       <img src="./kuva/kuva 4.jpg" class="bd-placeholder-img" width="100%" height="700" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
-        <div class="container">
-        
+      <div class="container">
+
         </div>
-      </div>
-      <div class="carousel-item active">
-      <div class="carousel-caption d-none d-md-block text-white text-shadow" style="background-color: rgba(0, 0, 0, 0.5);">
+        </div>
+        <div class="carousel-item active">
+        <div class="carousel-caption d-none d-md-block text-white text-shadow" style="background-color: rgba(0, 0, 0, 0.5);">
             <div class="container">
                 <h1 class="display-5 fw-bold">Tervetuloa <?php echo $_SESSION['username']; ?> Kyläkirjastoon</h1>
                 <div class="col-lg-6 mx-auto">
@@ -95,6 +103,7 @@
                 </div>
             </div>
         </div>
+
       <img src="./kuva/kuva 3.jpg" class="bd-placeholder-img" width="100%" height="700" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
       <div class="container">
           
@@ -147,26 +156,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
-
-<!-- <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-        </a>
-
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-        </ul>
-
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
-        </form>
-
-        <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Login</button>
-          <button type="button" class="btn btn-warning">Sign-up</button>
-        </div>
-      </div> -->

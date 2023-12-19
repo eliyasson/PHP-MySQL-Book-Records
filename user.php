@@ -1,4 +1,3 @@
- 
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
@@ -29,16 +28,16 @@ $stmt->close();
 $conn->close();
 ?>
 
+
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Käyttäjäsivu</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Document</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-        }
         .book {
             width: 20%;
             border: 1px solid #ccc;
@@ -50,14 +49,11 @@ $conn->close();
             background-color: #f4f4f4;
         }
         .book p {
-            margin: 5px 0;
+            margin: 5px 10px;
         }
-        
     </style>
 </head>
 <body style="isolation: isolate;">
-
-
 <div class="container py-3">
   <header>
     <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
@@ -67,18 +63,22 @@ $conn->close();
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="user.php">kirjalisraus</a>
-        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Laitteiden Lainaus</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="borrow.php">Laitteiden Lainaus</a>
+        <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="wishlist.php">Wish List</a>
+
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="chat.php">Chat</a>
         <a class="py-2 link-body-emphasis text-decoration-none" href="logout.php">Logout</a>
       </nav>
+
     </div>
 
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
       <h1 class="display-4 fw-normal text-body-emphasis">Tervetuloa Kyläkirjastoon</h1>
-      <p class="fs-5 text-body-secondary">Täällä voit nähdä saatavilla olevat kirjat, lainata laitteita ja keskustella kirjaston henkilökunnan kanssa avun saamiseksi.</p>
+      <p class="fs-5 text-body-secondary">Täällä voit nähdä saatavilla olevat kirjat</p>
     </div>
+
   </header>
-     <?php foreach ($books as $book): ?>
+  <?php foreach ($books as $book): ?>
             <div class="book">
                 <div class="col">
                 <div class="card mb-4 rounded-3 shadow-sm">
@@ -91,14 +91,15 @@ $conn->close();
                 <p>Vuosi: <?php echo htmlspecialchars($book['year']); ?></p>
                 <p>ISBN: <?php echo htmlspecialchars($book['isbn']); ?></p>
                 <p>Määrä: <?php echo htmlspecialchars($book['quantity']); ?></p>
-                <form action="borrow.php" method="post">
-                <input type="hidden" name="book_id" value="<?php echo $book['isbn']; ?>">
+                <form action="bookborrow.php" method="post">
+                    <input type="hidden" name="book_id" value="<?php echo $book['isbn']; ?>">
                     <button type="submit" name="borrow_book" class="w-100 btn btn-lg btn-outline-primary">Lainaa</button>
                 </form>
             </div>
         </div>
         </div>
  <?php endforeach; ?>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
