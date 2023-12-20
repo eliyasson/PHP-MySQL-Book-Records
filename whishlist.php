@@ -1,5 +1,3 @@
-GNU nano 3.2                                                                                                    wishlist.php
-
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {

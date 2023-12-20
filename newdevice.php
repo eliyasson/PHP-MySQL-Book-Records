@@ -32,7 +32,7 @@ if (!isset($_SESSION['username'])) {
         </header>
         <h2>Lisää laitteet tietokantaan</h2>
 
-</div>
+    </div>
 
 
 <?php

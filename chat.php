@@ -23,6 +23,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "INSERT failed: " . $conn->error;
     }
 }
+if (isset($_GET['delete'])) {
+    $delete_id = $_GET['delete'];
+    $delete_query = "UPDATE messages SET is_deleted = 1 WHERE id = $delete_id";
+    $result_delete = $conn->query($delete_query);
+
+    if (!$result_delete) {
+        echo "DELETE failed: " . $conn->error;
+    } else {
+        // Provide an option to undo the deletion
+        echo "<p>Message deleted. <a href='chat.php?undo=$delete_id'>Undo</a></p>";
+    }
+}
+// Implement the undo functionality
+if (isset($_GET['undo'])) {
+    $undo_id = $_GET['undo'];
+    $undo_query = "UPDATE messages SET is_deleted = 0 WHERE id = $undo_id";
+    $result_undo = $conn->query($undo_query);
+
+    if (!$result_undo) {
+        echo "UNDO failed: " . $conn->error;
+    } else {
+        echo "<p>Message restored.</p>";
+    }
+}
 
 ?>
 
@@ -66,6 +90,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             border-radius: 8px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
+        .message-container {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .user-message {
+            background-color: #cceeff;
+        }
+        .librarian-reply {
+            background-color: #ffcc99;
+        }
+        .message-info {
+            font-size: 14px;
+            color: #666;
+        }
+        .delete-link {
+            color: red;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        .delete-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body  style="isolation: isolate;">
@@ -92,53 +141,55 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
             <h1 class="display-4 fw-normal text-body-emphasis">Tervetuloa Kyläkirjastoon</h1>
             <p class="fs-5 text-body-secondary">Täällä voit keskustella kirjaston henkilökunnan kanssa avun saamiseksi.</p>
-            </div>
+        </div>
 
 
-        <form action="chat.php" method="post">
-            <pre>
-                Username: <input type="text" name="username">
-                Message: <textarea name="message"></textarea>
-                <hidden input type="text" name="timestamp">
-                <input type="submit" value="Send">
-            </pre>
-        </form>
+    <form action="chat.php" method="post">
+        <pre>
+            Username: <input type="text" name="username">
+            Message: <textarea name="message"></textarea>
+            <input type="submit" value="Send">
+        </pre>
+    </form>
 
+    <?php
+    // Display the messages
+    $query = "SELECT * FROM messages WHERE is_deleted = 0 ORDER BY timestamp DESC";
+    $result = $conn->query($query);
 
-          <?php
-        // Display the messages
-        $query = "SELECT * FROM messages";
-        $result = $conn->query($query);
+    if (!$result) {
+        die("Database access failed: " . $conn->error);
+    }
 
-        if (!$result) {
-            die("Database access failed: " . $conn->error);
+    while ($row = $result->fetch_assoc()) {
+        $id = htmlspecialchars($row['id']);
+        $username = htmlspecialchars($row['username']);
+        $message = htmlspecialchars($row['message']);
+        $timestamp = htmlspecialchars($row['timestamp']);
+        $reply = htmlspecialchars($row['reply']);
+
+        echo "<div class='message-container";
+        if (empty($reply)) {
+            echo " user-message'>";
+        } else {
+            echo " librarian-reply'>";
         }
 
-        $rows = $result->num_rows;
+        echo "<p><strong>Username:</strong> $username</p>";
+        echo "<p><strong>Message:</strong> $message</p>";
+        echo "<p class='message-info'><strong>Timestamp:</strong> $timestamp</p>";
 
-        for ($j = 0; $j < $rows; ++$j) {
-            $row = $result->fetch_array(MYSQLI_ASSOC);
-            $r0 = htmlspecialchars($row['id']);
-            $r1 = htmlspecialchars($row['username']);
-            $r2 = htmlspecialchars($row['message']);
-            $r3 = htmlspecialchars($row['timestamp']);
-
-            echo "<pre>";
-            echo "Id: $r0<br>";
-            echo "Username: $r1<br>";
-            echo "Message: $r2<br>";
-            echo "Timestamp: $r3<br>";
-            echo "</pre>";
+        if (!empty($reply)) {
+            echo "<p><strong>Librarian's Reply:</strong> $reply</p>";
         }
 
-        $result->close();
-        $conn->close();
-        function get_post($conn, $var)
-        {
-        return $conn->real_escape_string($_POST[$var]);
-        }
-        ?>
+        echo "<a class='delete-link' href='chat.php?delete=$id'>Delete</a>";
+        echo "</div>";
+    }
 
+    $result->free_result();
+    $conn->close();
+    ?>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
