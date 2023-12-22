@@ -65,7 +65,6 @@ $conn->close();
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="user.php">kirjalisraus</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="borrow.php">Laitteiden Lainaus</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="wishlist.php">Wish List</a>
-
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="chat.php">Chat</a>
         <a class="py-2 link-body-emphasis text-decoration-none" href="logout.php">Logout</a>
       </nav>
@@ -87,7 +86,7 @@ $conn->close();
                 </div>
                 <p>Kirjailija: <?php echo htmlspecialchars($book['author']); ?></p>
                 <p>Nimi: <?php echo htmlspecialchars($book['title']); ?></p>
-                <p>Kategoria: <?php echo htmlspecialchars($book['category']); ?></p>
+                <p>Kategoria: <?php echo htmlspecialchars($book['catagory']); ?></p>
                 <p>Vuosi: <?php echo htmlspecialchars($book['year']); ?></p>
                 <p>ISBN: <?php echo htmlspecialchars($book['isbn']); ?></p>
                 <p>Määrä: <?php echo htmlspecialchars($book['quantity']); ?></p>

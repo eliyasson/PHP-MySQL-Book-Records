@@ -134,6 +134,7 @@ if (isset($_GET['undo'])) {
 
                 <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="chat.php">Chat</a>
                 <a class="py-2 link-body-emphasis text-decoration-none" href="logout.php">Logout</a>
+                
             </nav>
 
         </div>
