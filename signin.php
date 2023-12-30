@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 header('Location: home.php');
                 exit();
             } else if ($user_type === 'customer') {
-                header('Location: user.php');
+                header('Location: availablebook.php');
                 exit();
             }
         } else {

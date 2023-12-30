@@ -11,7 +11,25 @@ if (!isset($_SESSION['username'])) {
 <head>
     <title>Home Page</title>
     <link rel="stylesheet" href="tyylit2.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="...">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+	body {
+          background-color: #8EC5FC;
+          background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+
+	}
+        .delete-btn:hover {
+            color: #fff; 
+            background-color: #ff0000; 
+            border-color: #ff0000; 
+        }
+
+        .update-btn:hover {
+            color: #fff; 
+            background-color: #00ff00; 
+            border-color: #00ff00;
+        }
+    </style>
 </head>
 <body style="isolatio: isolate;">
     <div class="container py-3">
@@ -26,7 +44,8 @@ if (!isset($_SESSION['username'])) {
                 <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="home.php">Lisää kirjoja</a>
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="newdevice.php">Lisää laitteita</a>
-                    <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Chat</a>
+		     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="displaywish.php">Customer wishes</a>
+                    <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="displaychat.php">viestejä</a>
                     <a class="py-2 link-body-emphasis text-decoration-none" href="logout.php">Logout</a>
                 </nav>
             </div>
@@ -67,7 +86,7 @@ if (
     $quantity = get_post($conn, 'quantity');
 
 
-    if (!empty($author) && !empty($title) && !empty($category) && !empty($year) && !empty($isbn) && !empty($quantity)) {
+    if (!empty($author) && !empty($title) && !empty($category) && !empty($year) && !empty($isbn)) {
         $query = "INSERT INTO books (author, title, catagory, year, isbn, quantity) VALUES ('$author', '$title', '$category', '$year', '$isbn', '$quantity')";
         $result = $conn->query($query);
 
@@ -98,29 +117,30 @@ if (
         die("Database access failed");
     }
     while ($row = $result->fetch_assoc()) {
-        echo '<div class="record">';
-        echo '<p>Author: ' . htmlspecialchars($row['author']) . '</p>';
-        echo '<p>Title: ' . htmlspecialchars($row['title']) . '</p>';
-        echo '<p>Category: ' . htmlspecialchars($row['catagory']) . '</p>';
-        echo '<p>Year: ' . htmlspecialchars($row['year']) . '</p>';
-        echo '<p>ISBN: ' . htmlspecialchars($row['isbn']) . '</p>';
-        echo '<p>Quantity: ' . htmlspecialchars($row['quantity']) . '</p>';
-        echo '<div class="button-group">';
-        echo '<form action="home.php" method="post">';
-        echo '<input type="hidden" name="delete" value="yes">';
-        echo '<input type="hidden" name="isbn" value="' . htmlspecialchars($row['isbn']) . '">';
-        echo '<input class="delete-btn" type="submit" value="DELETE RECORD">';
-        echo '</form>';
-        echo '<form action="update.php" method="post">';
-        echo '<input type="hidden" name="isbn" value="' . htmlspecialchars($row['isbn']) . '">';
-        echo '<input class="update-btn" type="submit" value="UPDATE">';
-        echo '</form>';
+       echo '<div class="modal-content rounded-3 shadow">';	
+         echo '<div class="modal-body text-center">';
+            echo '<p class="mb-0">Author: ' . htmlspecialchars($row['author']) . '</p>';
+            echo '<p class="mb-0">Title: ' . htmlspecialchars($row['title']) . '</p>';
+            echo '<p class="mb-0" >Category: ' . htmlspecialchars($row['catagory']) . '</p>';
+            echo '<p class="mb-0">Year: ' . htmlspecialchars($row['year']) . '</p>';
+            echo '<p class="mb-0">ISBN: ' . htmlspecialchars($row['isbn']) . '</p>';
+            echo '<p class="mb-0">Quantity: ' . htmlspecialchars($row['quantity']) . '</p>';
+         echo '</div>';
+        echo '<div class="button-group modal-footer d-flex justify-content-center">';
+            echo '<form action="home.php" method="post" class="d-inline-block me-3">';
+                echo '<input type="hidden" name="delete" value="yes">';
+                echo '<input type="hidden" name="isbn" value="' . htmlspecialchars($row['isbn']) . '">';
+                echo '<input class="delete-btn btn btn-lg btn-link fs-6 text-decoration-none rounded-0 border-end" fdprocessedid="2ld1d4"" type="submit" value="DELETE RECORD">';
+            echo '</form>';
+                echo '<form action="update.php" method="post" class="d-inline-block">';
+                echo '<input type="hidden" name="isbn" value="' . htmlspecialchars($row['isbn']) . '">';
+                echo '<input class="update-btn btn btn-lg btn-link fs-6 text-decoration-none rounded-0 border-end" fdprocessedid="2ld1d4"" type="submit" value="UPDATE">';
+            echo '</form>';
         echo '</div></div></div>';
-      }
-    
+	}
+
         $result->close();
         $conn->close();
-    
         function get_post($conn, $var)
         {
             return $conn->real_escape_string($_POST[$var]);
@@ -129,4 +149,4 @@ if (
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     </body>
     </html>
-    
+

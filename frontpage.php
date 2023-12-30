@@ -11,7 +11,7 @@
 <header data-bs-theme="dark">
 
     <nav class="navbar-dark fixed-top" style="background-color: rgba(0, 0, 0, 0.5)";>
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <header class="d-flex flex-wrap    py-1 mb-1 border-bottom">
         <div class="col-md-3 mb-2 mb-md-0">
             <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
             <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
@@ -20,14 +20,11 @@
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="frontpage.php" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Home</a></li>
-            <li><a href="#" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Info</a></li>
-            <li><a href="#" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Kirjasto</a></li>
-            <li><a href="#" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">eKirjasto</a></li>
-            <li><a href="#" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Palaute</a></li>
+            <li><a href="info.php" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Info</a></li>
         </ul>
 
 	<div class="col-md-3 text-end">
-	    <a href="signin.php" class="btn btn-outline-primary me-2" role="button">Login</a>
+	    <a href="signin.php" class="btn btn-primary" role="button">Login</a>
    	    <a href="signup.php" class="btn btn-primary" role="button">Sign-up</a>
 	</div>
 
@@ -56,7 +53,7 @@
                     <p class="fs-5 mb-4">Oletko kirjastonhoitaja vai käyttäjä? Valitse alla:</p>
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                         <a href="home.php?role=librarian" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Kirjastonhoitaja</a>
-                        <a href="user.php?role=user" class="btn btn-outline-light btn-lg px-4">Käyttäjä</a>
+                        <a href="availablebook.php?role=user" class="btn btn-outline-light btn-lg px-4">Käyttäjä</a>
                     </div>
                 </div>
             </div>
@@ -76,7 +73,7 @@
                     <p class="fs-5 mb-4">Oletko kirjastonhoitaja vai käyttäjä? Valitse alla:</p>
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                         <a href="home.php?role=librarian" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Kirjastonhoitaja</a>
-                        <a href="user.php?role=user" class="btn btn-outline-light btn-lg px-4">Käyttäjä</a>
+                        <a href="availablebook.php?role=user" class="btn btn-outline-light btn-lg px-4">Käyttäjä</a>
                     </div>
                 </div>
             </div>
@@ -94,7 +91,7 @@
                     <p class="fs-5 mb-4">Oletko kirjastonhoitaja vai käyttäjä? Valitse alla:</p>
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                         <a href="home.php?role=librarian" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Kirjastonhoitaja</a>
-                        <a href="user.php?role=user" class="btn btn-outline-light btn-lg px-4">Käyttäjä</a>
+                        <a href="availablebook.php?role=user" class="btn btn-outline-light btn-lg px-4">Käyttäjä</a>
                     </div>
                 </div>
             </div>

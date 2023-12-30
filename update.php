@@ -17,7 +17,6 @@ if ($conn->connect_error) {
     die("Fatal Connection Error");
 }
 
-// Function to sanitize user inputs
 function get_post($conn, $var) {
     return $conn->real_escape_string($_POST[$var]);
 }
@@ -32,29 +31,26 @@ if (isset($_POST['isbn'])) {
         $row = $result->fetch_assoc();
         $author = $row['author'];
         $title = $row['title'];
-        $category = $row['category'];
+        $catagory = $row['catagory'];
         $year = $row['year'];
         $quantity = $row['quantity'];
     }
 }
 
-// Update book record if 'Update' is submitted
 if (isset($_POST['update']) && isset($_POST['isbn'])) {
-    // Retrieve values from the form
     $author = get_post($conn, 'author');
     $title = get_post($conn, 'title');
-    $category = get_post($conn, 'category');
+    $catagory = get_post($conn, 'catagory');
     $year = get_post($conn, 'year');
     $isbn = get_post($conn, 'isbn');
     $quantity = get_post($conn, 'quantity');
 
-    // Prepare and execute the UPDATE query using prepared statement
     $stmt = $conn->prepare("UPDATE books SET author=?, title=?, catagory=?, year=?, quantity=? WHERE isbn=?");
-    $stmt->bind_param("ssssis", $author, $title, $category, $year, $quantity, $isbn);
+    $stmt->bind_param("ssssis", $author, $title, $catagory, $year, $quantity, $isbn);
 
     if ($stmt->execute()) {
         echo "Record updated successfully.<br><br>";
-        header('location:home.php'); // Redirect to home.php after successful update
+        header('location:home.php');
     } else {
         echo "UPDATE failed: " . $conn->error . "<br><br>";
     }
@@ -63,11 +59,10 @@ if (isset($_POST['update']) && isset($_POST['isbn'])) {
 }
 ?>
 <form action="update.php" method="post">
-    <!-- Display the form with the retrieved data -->
     <pre>
         Author:   <input type="text" name="author" value="<?php echo $author ?? ''; ?>">
         Title:    <input type="text" name="title" value="<?php echo $title ?? ''; ?>">
-        Category: <input type="text" name="category" value="<?php echo $catagory ?? ''; ?>">
+        Category: <input type="text" name="catagory" value="<?php echo $catagory ?? ''; ?>">
         Year:     <input type="text" name="year" value="<?php echo $year ?? ''; ?>">
         ISBN:     <input type="text" name="isbn" value="<?php echo $isbn ?? ''; ?>" readonly>
         Quantity: <input type="text" name="quantity" value="<?php echo $quantity ?? ''; ?>">

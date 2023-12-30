@@ -42,7 +42,7 @@
                 echo "Year: $r3<br>";
                 echo "Stock: $r4<br>";
                 echo "Loans: $r5<br>";
-                echo "<form action='newdevice.php' method='post'>";
+                echo "<form action='deldevice.php' method='post'>";
                 echo "<input type='hidden' name='delete' value='yes'>";
                 echo "<input type='hidden' name='device' value='$r0'>";
                 echo "<input type='submit' value='DELETE DEVICE'>";
