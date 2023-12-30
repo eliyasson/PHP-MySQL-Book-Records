@@ -87,10 +87,10 @@ $conn->close();
     </div>
   </header>
      <?php foreach ($books as $book): ?>
-            <div class="book">
-		<div class="col">
-            	<div class="card mb-4 rounded-3 shadow-sm">
-		<div class="card-header py-3">
+      <div class="book">
+		    <div class="col">
+          <div class="card mb-4 rounded-3 shadow-sm">
+		        <div class="card-header py-3">
             		<h4 class="my-0 fw-normal">Ilmainen</h4>
           	</div>
                 <p>Kirjailija: <?php echo htmlspecialchars($book['author']); ?></p>
@@ -108,8 +108,8 @@ $conn->close();
                   </form>
                 <?php endif; ?>
             </div>
-	</div>
-        </div>
+	      </div>
+      </div>
  <?php endforeach; ?>
 <script>
     function validateSearch() {
