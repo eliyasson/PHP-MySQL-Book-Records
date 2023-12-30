@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="tyylit2.css">
 </head>
 <body>
-<?php //dqltest.php
+<?php 
 require_once 'login.php';
 $conn = new mysqli($hn, $un, $pw, $db);
 if ($conn->connect_error) die("Fatal connection Error");
